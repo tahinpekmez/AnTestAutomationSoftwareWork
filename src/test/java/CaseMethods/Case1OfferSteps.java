@@ -40,7 +40,6 @@ public class Case1OfferSteps extends BaseCaseMethods {
         String floorNo = floorNumber("//*[@id='floor-number-select']/option");
         clickElementByXpath("//button[@class='tiko-btn-primary tiko-btn-is-small right']");
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//section/div[2]/div/div[1]/div/div[2]/app-form-address-bar//address/div[3]/span[1]")));
-//        Assert.assertTrue(findElementByXpath("//section/div[2]/div/div[1]/div/div[2]/app-form-address-bar//address/div[3]/span[1]").getText().contains(floorNo));
 
         // step - 2
         selectRandomListArg("//*[@id='bedroom'][@class='radio-button-group']//div/app-row-flex//*[@class='row-flex-wrapper']/label");
