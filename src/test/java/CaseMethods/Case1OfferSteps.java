@@ -25,11 +25,14 @@ public class Case1OfferSteps extends BaseCaseMethods {
     }
 
 
-    public void address() throws IOException {
+
+    public void houseInfo() throws IOException {
+        // address step
         fillInputFieldById("street-input", configuration.getProperty("street"));
         fillInputFieldById("building-number-input", configuration.getProperty("number"));
         deleteAllCharById("postal-input");
-        fillInputFieldById("postal-input", readStringTxtFileAndAddToList("./Report/postCodes.txt"));
+        String postCode = readStringTxtFileAndAddToList("./Report/postCodes.txt");
+        fillInputFieldById("postal-input", postCode);
         fillInputFieldById("block-input", "B");
         fillInputFieldById("door-number-input", configuration.getProperty("doorNumber"));
         int floorNumber = driver.findElements(By.xpath("//*[@id='floor-number-select']/option")).size();
@@ -37,12 +40,8 @@ public class Case1OfferSteps extends BaseCaseMethods {
         String floorNo = floorNumber("//*[@id='floor-number-select']/option");
         clickElementByXpath("//button[@class='tiko-btn-primary tiko-btn-is-small right']");
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//section/div[2]/div/div[1]/div/div[2]/app-form-address-bar//address/div[3]/span[1]")));
-        Assert.assertTrue(findElementByXpath("//section/div[2]/div/div[1]/div/div[2]/app-form-address-bar//address/div[3]/span[1]").getText().contains(floorNo));
-        sleep(1);
-    }
+//        Assert.assertTrue(findElementByXpath("//section/div[2]/div/div[1]/div/div[2]/app-form-address-bar//address/div[3]/span[1]").getText().contains(floorNo));
 
-
-    public void houseInfo() {
         // step - 2
         selectRandomListArg("//*[@id='bedroom'][@class='radio-button-group']//div/app-row-flex//*[@class='row-flex-wrapper']/label");
         String bedroomNumber = houseProperties("//*[@id='bedroom'][@class='radio-button-group']//div/app-row-flex//*[@class='row-flex-wrapper']/label");
@@ -78,12 +77,15 @@ public class Case1OfferSteps extends BaseCaseMethods {
         Assert.assertEquals(findElementByXpath(configuration.getProperty("userNameAndSurnameXpath")).getText(), configuration.getProperty("userNameAndSurname"));
         Assert.assertEquals(findElementByXpath(configuration.getProperty("userMailXpath")).getText(), configuration.getProperty("userMail"));
         Assert.assertEquals(findElementByXpath(configuration.getProperty("userPhoneXpath")).getText(), configuration.getProperty("userPhone"));
+        Assert.assertTrue(Objects.equals(findElementByXpath("//app-form-success/app-form-address-bar/div/div/address/div[2]/span").getText(), "Barcelona, España") || Objects.equals(findElementByXpath("//app-form-success/app-form-address-bar/div/div/address/div[2]/span").getText(), "Madrid, España"));
+        Assert.assertEquals(findElementByXpath("//app-form-success/app-form-address-bar/div/div/address/div[1]/div/span[1]").getText().replace(",", ""), configuration.getProperty("street"));
+        Assert.assertEquals(findElementByXpath("//app-form-success/app-form-address-bar/div/div/address/div[1]/div/span[2]").getText().replace(",", ""), configuration.getProperty("number"));
+        Assert.assertEquals(findElementByXpath("//app-form-success/app-form-address-bar/div/div/address/div[1]/div/span[3]").getText(), postCode);
+        Assert.assertTrue(findElementByXpath("//app-form-success/app-form-address-bar/div/div/address/div[3]/span[3]").getText().contains(configuration.getProperty("doorNumber")));
+        Assert.assertTrue(findElementByXpath("//app-form-success/app-form-address-bar/div/div/address/div[3]/span[1]").getText().contains(floorNo));
         Assert.assertTrue(Objects.equals(findElementByXpath(configuration.getProperty("bedroomXpath")).getText(), "Más de 5") || Objects.equals(findElementByXpath(configuration.getProperty("bedroomXpath")).getText(), bedroomNumber));
         Assert.assertTrue(Objects.equals(findElementByXpath(configuration.getProperty("bathroomXpath")).getText(), "Más de 3") || Objects.equals(findElementByXpath(configuration.getProperty("bathroomXpath")).getText(), bathroomNumber));
         Assert.assertEquals(findElementByXpath("//app-form-success/app-form-address-bar/div/div/address/div[5]/div/span").getText(), houseType);
-
-
-
 
     }
 }

@@ -15,7 +15,6 @@ public class Case1ToGetOffer extends BaseCaseMethods {
 
     public void toGetOffer() throws IOException {
         case1OfferSteps.mainPageSteps();
-        case1OfferSteps.address();
         case1OfferSteps.houseInfo();
 
     }
