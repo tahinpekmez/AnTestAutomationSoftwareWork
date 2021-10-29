@@ -4,19 +4,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class BaseCaseMethods extends BasePage{
 
-    Select select;
 
     public BaseCaseMethods(WebDriver driver) {
         super(driver);
@@ -29,10 +24,12 @@ public class BaseCaseMethods extends BasePage{
     }
 
 
+
     public void selectRandomListArg(String xpath){
         List<WebElement> elements = driver.findElements(By.xpath(xpath));
         elements.get(randomNumber(elements.size())).click();
     }
+
 
 
     protected String readStringTxtFileAndAddToList(String fileName) throws IOException {
@@ -47,6 +44,7 @@ public class BaseCaseMethods extends BasePage{
 
         return listOfLines.get(randomNumber(listOfLines.size()));
     }
+
 
 
     protected void deleteAllCharById(String id){

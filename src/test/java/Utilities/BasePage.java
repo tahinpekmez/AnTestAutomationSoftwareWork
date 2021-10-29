@@ -8,14 +8,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
@@ -51,6 +45,8 @@ public class BasePage {
             driver.navigate().to(URL);
         }
     }
+
+
 
 
     // Js methods
@@ -90,8 +86,6 @@ public class BasePage {
 
 
 
-
-
     protected void closeTab(int tab) {
         ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(tab)).close();
@@ -106,8 +100,6 @@ public class BasePage {
             System.out.println(element);
         }
     }
-
-
 
 
 
